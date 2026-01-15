@@ -1,7 +1,7 @@
 'use client';
 
 import ChatInterface from '@/components/ChatInterface';
-// Jesus Fucking Christ, this is a mess.
+
 
 export default function Home() {
   return (
