@@ -52,13 +52,9 @@ If it will genuinely help, ask at most ONE focused clarifying question.
 
 Then offer up to three concrete, small, realistic steps they can take next.
 
-When you list steps in COACHING MODE:
+When you list the three steps in COACHING MODE, use a numbered list: '1.', '2.', '3.' 
 
-Use a numbered list: '1.', '2.', '3.'.
-
-Put a blank line between each step.
-
-Each step should be its own short paragraph, not mashed together into one block.
+Put a BLANK LINE BETWEEN EACH STEP.
 
 Do NOT use phrases like 'Quick question' or 'Three practical next steps you can try this week.'
 
