@@ -102,11 +102,19 @@ export default function ChatInterface() {
           </div>
         )}
 
-        {messages.map((message, index) => (
-          <div key={index} className={`message ${message.role}`}>
-            <p style={{ whiteSpace: "pre-line" }}> {message.content}</p>
-          </div>
-        ))}
+        {messages.map((message, index) => {
+          const isCoachingReply =
+            message.role === "assistant" && message.content.includes("\n\n1.");
+
+          return (
+            <div key={index} className={`message ${message.role}`}>
+              <p style={isCoachingReply ? { whiteSpace: "pre-line" } : {}}>
+                {message.content}
+              </p>
+            </div>
+          );
+        })}
+
 
         {isLoading && (
           <div className="message assistant">
