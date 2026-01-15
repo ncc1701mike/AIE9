@@ -79,6 +79,18 @@ Do not mention the words 'mode', 'GENERAL MODE', or 'COACHING MODE' in your repl
 
 load_dotenv()
 
+def format_coaching_steps(text: str) -> str:
+    # Only try to format if we see a "1." step marker
+    if "1." not in text:
+        return text
+
+    # Ensure each numbered step starts on its own new line
+    text = text.replace(" 1.", "\n\n1.")
+    text = text.replace(" 2.", "\n\n2.")
+    text = text.replace(" 3.", "\n\n3.")
+
+    return text
+
 app = FastAPI()
 @app.get("/api/health")
 async def api_health():
@@ -115,6 +127,15 @@ def chat(request: ChatRequest):
                 {"role": "user", "content": user_message}
             ]
         )
-        return {"reply": response.choices[0].message.content}
+
+        # 1) Extract the raw text from OpenAI
+        raw_reply = response.choices[0].message.content
+
+        # 2) Run it through the formatter so steps get spaced out
+        formatted_reply = format_coaching_steps(raw_reply)
+
+        # 3) Return the formatted reply
+        return {"reply": formatted_reply}
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error calling OpenAI API: {str(e)}")
