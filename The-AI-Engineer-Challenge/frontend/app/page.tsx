@@ -1,7 +1,7 @@
 'use client';
 
 import ChatInterface from '@/components/ChatInterface';
-// Adding this Debug Line to check git commit and ensure it works
+// Jesus Fucking Christ, this is a mess.
 
 export default function Home() {
   return (
