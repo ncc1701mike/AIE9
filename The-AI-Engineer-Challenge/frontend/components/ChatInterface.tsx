@@ -104,7 +104,7 @@ export default function ChatInterface() {
 
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.role}`}>
-            <p>{message.content}</p>
+            <p style={{ whiteSpace: "pre-line" }}> {message.content}</p>
           </div>
         ))}
 
