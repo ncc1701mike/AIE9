@@ -3,6 +3,7 @@ from openai import AsyncOpenAI, OpenAI
 import openai
 from typing import List
 import os
+import numpy as np
 import asyncio
 
 
@@ -20,27 +21,32 @@ class EmbeddingModel:
         self.embeddings_model_name = embeddings_model_name
         self.batch_size = batch_size
 
-    async def async_get_embeddings(self, list_of_text: List[str]) -> List[List[float]]:
-        batches = [list_of_text[i:i + self.batch_size] for i in range(0, len(list_of_text), self.batch_size)]
-        
-        async def process_batch(batch):
-            embedding_response = await self.async_client.embeddings.create(
-                input=batch, model=self.embeddings_model_name
+    def get_embeddings(self, list_of_text: List[str]) -> List[List[float]]:
+        """Synchronous embedding call, with simple batching."""
+        batch_size = 128
+        all_embeddings: List[List[float]] = []
+
+        for i in range(0, len(list_of_text), batch_size):
+            batch = list_of_text[i : i + batch_size]
+
+            resp = self.client.embeddings.create(
+                input=batch,
+                model=self.embeddings_model_name,
             )
-            return [embeddings.embedding for embeddings in embedding_response.data]
-        
-        # Use asyncio.gather to process all batches concurrently
-        results = await asyncio.gather(*[process_batch(batch) for batch in batches])
-        
-        # Flatten the results
-        return [embedding for batch_result in results for embedding in batch_result]
+
+            # resp.data is a list of objects with `.embedding`
+            all_embeddings.extend([item.embedding for item in resp.data])
+
+        return all_embeddings
+
+    async def async_get_embeddings(self, list_of_text: List[str]) -> List[List[float]]:
+        """Async wrapper that runs the sync client in a background thread."""
+        return await asyncio.to_thread(self.get_embeddings, list_of_text)
 
     async def async_get_embedding(self, text: str) -> List[float]:
-        embedding = await self.async_client.embeddings.create(
-            input=text, model=self.embeddings_model_name
-        )
-
-        return embedding.data[0].embedding
+        """Helper for a single text, reusing async_get_embeddings."""
+        embeddings = await self.async_get_embeddings([text])
+        return embeddings[0]
 
     def get_embeddings(self, list_of_text: List[str]) -> List[List[float]]:
         embedding_response = self.client.embeddings.create(
