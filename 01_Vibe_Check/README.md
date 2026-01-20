@@ -45,15 +45,15 @@ You will be required to submit a link to your GitHub, as well as screenshots of 
 Please evaluate your system on the following questions:
 
 1. Explain the concept of object-oriented programming in simple terms to a complete beginner.
-    - Aspect Tested:
+    - Aspect Tested: Explanation of technical concepts
 2. Read the following paragraph and provide a concise summary of the key points…
-    - Aspect Tested:
+    - Aspect Tested: Reading comprehension and ability to summarize
 3. Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.
-    - Aspect Tested:
+    - Aspect Tested: Creativity, tone, and ability to produce a coherent narrative
 4. If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?
-    - Aspect Tested:
+    - Aspect Tested: Basic math and word-problem translation
 5. Rewrite the following paragraph in a professional, formal tone…
-    - Aspect Tested:
+    - Aspect Tested: Ability to convey a professional, formal tone
 
 #### ❓Question #1:
 
@@ -68,23 +68,23 @@ New Prompt vs Old Prompt answer criteria:
 GPT 5 scored each answer with old vs. new prompt out of 10. 
 
 Results: 
-1. OOP explanationAspect tested: Clear explanation of a technical concept for a complete beginner.
+1. OOP explanation Aspect tested: Explanation of technical concepts for a complete beginner.
 Old prompt score: 8/10  Current prompt score: 9/10
 Primary differences: New answer drops the “quick question / next steps” coaching chatter. Structure is clearer and more focused on one main analogy. Still a bit dense, but closer to what a direct, simple explanation should be.
 
-2. Dickens summary. Aspect tested: Reading comprehension and concise summarization.
+2. Dickens summary. Aspect tested: Reading comprehension and ability to summarize.
 Old prompt score: 9/10  Current prompt score: 10/10
 Primary differences: New answer is a single, tight sentence with no extra framing. Captures the core idea of extremes and contradiction cleanly. Removes “practice” suggestions that were not part of the task.
 
-3. Robot friendship story. Aspect tested: Creativity, emotional tone, and short narrative coherence.
+3. Robot friendship story. Aspect tested: Creativity, tone, and ability to produce a coherent narrative.
 Old prompt score: 9/10  Current prompt score: 9/10
 Primary differences: New story is slightly weirder and more original in its setting. Both versions are coherent and on tone, but the new one has no coaching preamble or “next steps”. Quality stayed high while extra scaffolding disappeared.
 
-4. Apples and oranges math. Aspect tested: Basic arithmetic and word-problem translation.
+4. Apples and oranges math. Aspect tested: Basic math and word-problem translation.
 Old prompt score: 9/10    Current prompt score: 10/10
 Primary differences: New answer is one clean line with correct numbers and simple reasoning. Old answer added irrelevant “check the store” advice. Current version is ideal for a math sanity check.
 
-5. Formal rewrite. Aspect tested: Style transfer into a professional, very formal tone.
+5. Formal rewrite. Aspect tested: Ability to convey a professional, formal tone.
 Old prompt score: 9/10    Current prompt score: 9/10
 Primary differences: Early new answer after the system change was simpler and less formal (7/10). After you refined the user prompt, the latest answer moved back to a more formal, sophisticated register.New final version still preserves meaning, removes slang, and uses higher-register vocabulary while staying direct.
 
