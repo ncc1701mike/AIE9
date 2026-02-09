@@ -39,6 +39,7 @@ from open_deep_research.state import (
     ResearchQuestion,
     SupervisorState,
 )
+
 from open_deep_research.utils import (
     anthropic_websearch_called,
     get_all_tools,
@@ -49,8 +50,9 @@ from open_deep_research.utils import (
     is_token_limit_exceeded,
     openai_websearch_called,
     remove_up_to_last_ai_message,
-    think_tool,
 )
+
+from open_deep_library.utils import think_tool  # ← Make sure this line exists at module level
 
 # Initialize a configurable model that we will use throughout the agent
 configurable_model = init_chat_model(
