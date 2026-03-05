@@ -8,13 +8,13 @@ from __future__ import annotations
 from pydantic import BaseModel, Field
 
 from langgraph.graph import StateGraph, START, END
-from langgraph.prebuilt import ToolNode
+from langgraph.prebuilt import ToolNode, tools_condition
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import AIMessage
 
 from app.state import MessagesState
 from app.models import get_chat_model
-from app.tools import get_tool_belt
+from app.tools import get_tool_belt_async
 
 
 class HelpfulnessResult(BaseModel):
@@ -27,11 +27,12 @@ def _build_model_with_tools():
     return model.bind_tools(get_tool_belt())
 
 
-def call_model(state: MessagesState) -> dict:
+async def call_model(state: MessagesState) -> dict:
     """Invoke the model with the accumulated messages and append its response."""
-    model = _build_model_with_tools()
-    messages = state["messages"]
-    response = model.invoke(messages)
+    tools = await get_tool_belt_async()
+    model = get_chat_model()
+    model_with_tools = model.bind_tools(tools)
+    response = await model_with_tools.ainvoke(state["messages"])
     return {"messages": [response]}
 
 
@@ -84,23 +85,16 @@ def helpfulness_decision(state: MessagesState):
 
 
 def build_graph():
-    """Build an agent graph with an auxiliary helpfulness evaluation subgraph."""
+    async def action_node(state: MessagesState) -> dict:
+        tools = await get_tool_belt_async()
+        tool_node = ToolNode(tools)
+        return await tool_node.ainvoke(state)
+
     graph = StateGraph(MessagesState)
-    tool_node = ToolNode(get_tool_belt())
     graph.add_node("agent", call_model)
-    graph.add_node("action", tool_node)
-    graph.add_node("helpfulness", helpfulness_node)
+    graph.add_node("action", action_node)
     graph.add_edge(START, "agent")
-    graph.add_conditional_edges(
-        "agent",
-        route_to_action_or_helpfulness,
-        {"action": "action", "helpfulness": "helpfulness"},
-    )
-    graph.add_conditional_edges(
-        "helpfulness",
-        helpfulness_decision,
-        {"continue": "agent", "end": END, END: END},
-    )
+    graph.add_conditional_edges("agent", tools_condition, {"tools": "action", END: END})
     graph.add_edge("action", "agent")
     return graph
 
