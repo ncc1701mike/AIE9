@@ -1,3 +1,11 @@
+LOOM DEMO LINK: [https://www.loom.com/share/c7f821febab3468ca6e1381b4dd2f6f4](https://www.loom.com/share/c7f821febab3468ca6e1381b4dd2f6f4)  
+  
+3 Questions I Have: 
+
+3 Things I Learned: 
+
+
+
 ## # Session 15: Build & Serve Agentic Graphs with LangGraph
 
 ### Prerequisites
@@ -67,8 +75,6 @@ There are two mechanisms LangGraph uses to prevent runaway looping- the first is
 
 What is the role of `langgraph.json` in the LangGraph Deployments? Describe each of its key fields and how the platform uses this file to discover and serve your graphs. 
 
-
-
 Answer:
 
 Langgraph.json is the deployment manifest for the entire app. It tells the platform what to build, how to build it, and what to make available for dev. It tells Langsmith where to find graphs and which runtime environment in which to build them. 
@@ -84,8 +90,6 @@ Python_version- specifies which Python version to use
 Graphs- graphs are core. This is what Langsmith uses to locate and deploy compiled graphs.
 
 Assistants- these are the instantiation of the agents themselves, and these represent the primary nodes in the deployed graphs.
-
-
 
 #### Activity #1:
 
