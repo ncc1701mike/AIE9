@@ -1,13 +1,12 @@
-<p align = "center" draggable="false" ><img src="https://github.com/AI-Maker-Space/LLM-Dev-101/assets/37101144/d1343317-fa2f-41e1-8af1-1dbb18399719"
-     width="200px"
-     height="auto"/>
-</p>
 
-## <h1 align="center" id="heading">Session 16: LLM Servers</h1>
 
-| 📰 Session Sheet                                  | ⏺️ Recording                           | 🖼️ Slides                                   | 👨‍💻 Repo       | 📝 Homework                                              | 📁 Feedback                        |
+## # Session 16: LLM Servers
+
+
+| 📰 Session Sheet                                  | ⏺️ Recording                           | 🖼️ Slides                                  | 👨‍💻 Repo    | 📝 Homework                                              | 📁 Feedback                        |
 | ------------------------------------------------- | -------------------------------------- | ------------------------------------------- | ------------- | -------------------------------------------------------- | ---------------------------------- |
 | [Session 16: LLM Servers](https://www.notion.so/) | [Recording!](https://us02web.zoom.us/) | [Session 16 Slides](https://www.canva.com/) | You are here! | [Session 16 Assignment: LLM Servers](https://forms.gle/) | [AIE9 Feedback](https://forms.gle) |
+
 
 **⚠️!!! PLEASE BE SURE TO SHUTDOWN YOUR DEDICATED ENDPOINT ON FIREWORKS AI WHEN YOU'RE FINISHED YOUR ASSIGNMENT !!!⚠️**
 
@@ -18,7 +17,6 @@ In today's assignment, we'll be creating Fireworks AI endpoints, and then buildi
 - 🤝 Breakout Room #1
   - Set-up Open Source Endpoint (Instructions [here](./ENDPOINT_SETUP.md)) ((This process may take 15-20min.))
   - Test Endpoint and Embeddings with the `endpoint_slammer.ipynb` notebook.
-
 - 🤝 Breakout Room #2
   - Use the Open Source Endpoints to build a RAG LangGraph application
 
@@ -83,7 +81,13 @@ What is the difference between serverless and dedicated endpoints?
 
 #### ✅ Answer:
 
-_(insert your answer here)_
+Serverless
+Serverless endpoints provide GPU from a remote host- hugely advantageous if local compute is minimal. Performance varies depending on usage by others because its a shared deployment. Cost is per token e.g., pay-per-use which is great, but use is tightly rate limited. Perfect for prototyping. 
+
+Dedicated
+Dedicated endpoints rely on local GPU, so less latency and higher throughput, and the limit on performance is dependent on local GPU. Cost is per GPU second which gets expensive very quickly, thus dedicated doesn't begin to make sense until use volume per GPU second becomes high. Very much best for high volume production. 
+
+*(insert your answer here)*
 
 ### ❓ Question #2:
 
@@ -91,7 +95,11 @@ Why is it important to consider token throughput and latency when choosing an LL
 
 #### ✅ Answer:
 
-_(insert your answer here)_
+It's important to take token throughput and latency into consideration when choosing an LLM for several reasons... Latency, which in this case is defined as the time to first token (TTFT), determines perceived responsiveness- low latency feels fast and the model responds quickly, which is what users want. High latancy feels like the model is broken when there's a long dalay before the model begins answering and percieved responsiveness seems slow- users aren't interested in waiting too long so high latency is not looked on very favorably. 
+
+Token throughput is likewise important because it defines how many tokens per second the model generates after it starts, which determines how long it takes the full response to appear once the model begind to respond. This isn't as critical to perceived responesiveness as TTFT, as long as TTFT is fast and user can see that the model is "working".
+
+In terms of cost, high throughput with high user volume means more users per gpu-second which optimizes cost relative to low volume and low throughput, which saves on gpu per second cost but increases token use as requests pile up. 
 
 ## Activity 1: RAGAS Evaluation with Cost Analysis
 
