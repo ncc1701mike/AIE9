@@ -84,10 +84,10 @@ What is the difference between serverless and dedicated endpoints?
 Serverless
 Serverless endpoints provide GPU from a remote host- hugely advantageous if local compute is minimal. Performance varies depending on usage by others because its a shared deployment. Cost is per token e.g., pay-per-use which is great, but use is tightly rate limited. Perfect for prototyping. 
 
-Dedicated
+Dedicated  
 Dedicated endpoints rely on local GPU, so less latency and higher throughput, and the limit on performance is dependent on local GPU. Cost is per GPU second which gets expensive very quickly, thus dedicated doesn't begin to make sense until use volume per GPU second becomes high. Very much best for high volume production. 
 
-*(insert your answer here)*
+
 
 ### ❓ Question #2:
 
@@ -95,7 +95,7 @@ Why is it important to consider token throughput and latency when choosing an LL
 
 #### ✅ Answer:
 
-It's important to take token throughput and latency into consideration when choosing an LLM for several reasons... Latency, which in this case is defined as the time to first token (TTFT), determines perceived responsiveness- low latency feels fast and the model responds quickly, which is what users want. High latancy feels like the model is broken when there's a long dalay before the model begins answering and percieved responsiveness seems slow- users aren't interested in waiting too long so high latency is not looked on very favorably. 
+Token throughput and latency are important considerations when choosing an LLM for several reasons... Latency, which in this case is defined as the time to first token (TTFT), determines perceived responsiveness- low latency feels fast and the model responds quickly, which is what users want. High latancy feels like the model is broken when there's a long dalay before the model begins answering and percieved responsiveness seems slow- users aren't interested in waiting too long so high latency is not looked on very favorably. 
 
 Token throughput is likewise important because it defines how many tokens per second the model generates after it starts, which determines how long it takes the full response to appear once the model begind to respond. This isn't as critical to perceived responesiveness as TTFT, as long as TTFT is fast and user can see that the model is "working".
 
