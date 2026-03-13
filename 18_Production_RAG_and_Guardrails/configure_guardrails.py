@@ -41,29 +41,14 @@ def configure_guardrails(api_key: str):
 
 
 def main():
-    # Check for API key in environment variable first
-    api_key = os.getenv("GUARDRAILS_API_KEY")
+    from config import GUARDRAILS_API_KEY
     
-    # Then check command line argument
-    if not api_key and len(sys.argv) > 1:
-        api_key = sys.argv[1]
-    
-    # If still no key, prompt for it
+    api_key = GUARDRAILS_API_KEY
+
     if not api_key:
-        print("🛡️  Guardrails AI Configuration")
-        print("   Get your API key from: https://hub.guardrailsai.com/keys")
-        print()
-        api_key = input("Enter your Guardrails AI API key: ").strip()
-    
-    if not api_key:
-        print("❌ Error: API key is required")
-        print("\nUsage:")
-        print("  uv run python configure_guardrails.py [API_KEY]")
-        print("  or")
-        print("  export GUARDRAILS_API_KEY=your_key")
-        print("  uv run python configure_guardrails.py")
+        print("❌ Error: GUARDRAILS_API_KEY not found in .env")
         sys.exit(1)
-    
+
     configure_guardrails(api_key)
 
 
