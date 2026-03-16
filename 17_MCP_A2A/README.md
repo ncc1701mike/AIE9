@@ -1,5 +1,3 @@
-
-
 ## # Session 17: Model Context Protocol (MCP) & Agent-to-Agent (A2A) Protocol
 
 
@@ -174,8 +172,8 @@ Key architectural differences:
                          MCP                  A2A
 ```
 
-Primary relationship     Model ↔ Tool        Agent ↔ Agent           Communication style      Request/response    Task delegation, streaming, async Who initiates            Client model        Either agent
-State                    Stateless tools     Agents maintain task state Discovery                Tool list           Agent cards
+Primary relationship             Model ↔ Tool                 Agent ↔ Agent                                   Communication style      Request/response    Task delegation, streaming, async               Who initiates                         Client model                    Either agent  
+State                                     Stateless tools         Agents maintain task state                                     Discovery                                    Tool list                        Agent cards
 
 When to choose A2A over MCP:
 A2A should be selected when agents with specialized roles are needed to collaborate, e.g. a research agent that delegates to a data analysis agent, which delegates to a visualization agent, where each has its own reasoning loop, memory, and capabilities. MCP would require one model to orchestrate everything itself, which doesn't scale well for complex multi-domain tasks.
